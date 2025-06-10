@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Learning Human-to-Robot Handovers from Point Clouds">
+  <meta name="keywords" content="Handover-Sim2Real">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LatentHOI: On the Generalizable Hand Object Motion Generation with Latent Hand Diffusion.</title>
+
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-72PW1FZDE4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-72PW1FZDE4');
+  </script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">LatentHOI: On the Generalizable Hand Object Motion Generation with Latent Hand Diffusion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Muchen Li</a><sup>*1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Sammy Christen</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Chengde Wan</a><sup>6</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Yujun Cai</a><sup>6</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Renjie Liao</a><sup>1,2,4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Leonid Sigal</a><sup>1,2,4,5</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Shugao Ma</a><sup>6</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of British Columbia,</span>
+            <span class="author-block"><sup>2</sup>Vector Institute for AI,</span>
+            <span class="author-block"><sup>3</sup>ETH Zurich,</span>
+            <span class="author-block"><sup>4</sup>Canada CIFAR AI Chair,</span>
+            <span class="author-block"><sup>5</sup>NSERC CRC Chair,</span>
+            <span class="author-block"><sup>6</sup>Meta Reality Labs</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_LatentHOI_On_the_Generalizable_Hand_Object_Motion_Generation_with_Latent_CVPR_2025_paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="./static/videos/LatentHOI_supplementary_video.mp4"
+                   class="external-link button is-normal is-rounded is-disabled is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Poster Link. -->
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1qKdHovBW6kdGMl_u5pVHifSGCANAfx7P/view?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Poster</span>
+                </a>
+              </span>
+             <!-- Code Link. -->
+             <span class="link-block">
+             <a href="https://github.com/jojo23333/LatetHOI"
+                 class="external-link button is-normal is-rounded is-dark"> 
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body is-centered">
+        <img src="./static/images/teaser_quali_result.png"  class="center"/>
+      <h2 class="subtitle has-text-centered">
+        We introduce a framework to learn generalizable hand object motion generation.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="section_video">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="publication-video">
+          <video id="teaser" autoplay controls height="50%">
+            <source src="https://ait.ethz.ch/projects/2023/handover-sim2real//handover_teaser.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+         <h2 class="subtitle has-text-centered">
+            D-Grasp is a solution to the new dynamic grasp synthesis task: given an object with a known 6D pose and a grasp reference, our goal is to generate motions that move the object to a target 6D pose.
+        </h2> 
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!--/ Abstract. -->
+<section class="section">
+    <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Current research on generating 3D hand-object interaction motion primarily focuses on in-domain objects. Generalization to unseen objects is essential for practical applications, yet it remains both challenging and largely unexplored.In this paper, we propose LatentHOI, a novel approach designed to tackle the challenges of generalizing hand-object interaction to unseen objects.Our main insight lies in decoupling high-level temporal motion from fine-grained spatial hand-object interactions with a latent diffusion model coupled with a Grasping Variational Autoencoder (GraspVAE). This configuration not only enhances the conditional dependency between spatial grasp and temporal motion but also improves data utilization and reduces overfitting through regularization in the latent space. We conducted extensive experiments in an unseen-object setting on both single-hand grasping and bi-manual motion datasets, including GRAB, DexYCB, and OakInk.Quantitative and qualitative evaluations demonstrate that our method significantly enhances the realism and physical plausibility of generated motions for unseen objects, both in single and bimanual manipulations, compared to the state-of-the-art
+          </p>
+        </div>
+      </div>
+    </div> 
+      
+     <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/IsjCdoIAA7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div> 
+  </section> 
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 mb-2">Pipeline Overview</h2>
+          
+          <!-- Pipeline Figure -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <div class="content has-text-centered">
+                <img src="static/images/pipeline.png" alt="Pipeline Overview" style="width: 100%;"/>
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column content has-text-left">
+              <ul style="list-style-type: disc;">
+                <li>During training, grasp information is encoded into the latent code <em>Z</em>. The joint distribution of global motion <em>O</em> and <em>H<sub>&gamma;</sub></em> is learned through the diffusion objective.</li>
+                <li>During sampling, given the object point cloud and text, latent diffusion produces a sequence of latent grasp (for both hands) as well as global motion. These frames are then sent into GraspVAE where they are decoded to bi-mannual grasp.</li>
+                <li>More details can be found in the paper.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 mb-2">Quantitative Results</h2>
+          
+          <!-- Pipeline Figure -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <div class="content has-text-centered">
+                <img src="static/images/quantative_results.png" alt="Quantitative Results" style="width: 150%;"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="columns">
+            <div class="column content has-text-left">
+              Trained on GRAB training set, tested on ood object split from GRAB and OakInk
+              <ul style="list-style-type: disc;">
+                <li><strong>IV</strong>: The volume of hand object interpenetration.</li>
+                <li><strong>ID</strong>: The depth of hand object interpenetration.</li>
+                <li><strong>CR</strong>: Contact ratio between hand and object surface.</li>
+                <li><strong>IVU</strong>: Interpenetration volume per contact unit.</li>
+                <li><strong>Phy</strong>: Contact rate when object is off the ground.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 mb-2">Qualitative Results on OakInk Objects</h2>
+          
+          <!-- Video 1 -->
+          <div class="columns is-centered mb-1">
+            <div class="column">
+              <h3 class="title is-4 mb-1">Pour Teapot</h3>
+              <div class="publication-video">
+                <video autoplay controls muted loop playsinline height="100%">
+                  <source src="./static/videos/oakink_teapot_14_pour.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="columns is-centered mb-1">
+            <div class="column">
+              <h3 class="title is-4 mb-1">Drink from Glass</h3>
+              <div class="publication-video">
+                <video autoplay controls muted loop playsinline height="100%">
+                  <source src="./static/videos/oakink_wineglass_10_drink.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 3 -->
+          <div class="columns is-centered mb-1">
+            <div class="column">
+              <h3 class="title is-4 mb-1">Peel with Knife</h3>
+              <div class="publication-video">
+                <video autoplay controls muted loop playsinline height="100%">
+                  <source src="./static/videos/oakink_knife_s102_peel.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 4 -->
+          <div class="columns is-centered mb-1">
+            <div class="column">
+              <h3 class="title is-4 mb-1">Use Phone</h3>
+              <div class="publication-video">
+                <video autoplay controls muted loop playsinline height="100%">
+                  <source src="./static/videos/oakink_phone_2_call.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+  <div class="container is-max-desktop">
+  <!-- Side by side video section -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">More Qualitative Results</h2>
+      
+      <h3 class="title is-4">Pick up the camera.</h3>
+      <!-- Row 1 -->
+      <div class="columns is-centered is-gapless">
+        <div class="column">
+          <div class="publication-video px-1">
+            <video autoplay controls muted loop playsinline height="50%" width="60%">
+              <source src="./static/videos/pickup_camera_cropped.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="publication-video px-1">
+            <video autoplay controls muted loop playsinline height="50%" width="60%">
+              <source src="./static/videos/pickup_camera_360_cropped.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <h3 class="title is-4">Browse the camera</h3>
+      <div class="columns is-centered is-gapless">
+        <div class="column">
+          <div class="publication-video px-1">
+            <video autoplay controls muted loop playsinline height="50%" width="60%">
+              <source src="./static/videos/browse_camera_cropped.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="publication-video px-1">
+            <video autoplay controls muted loop playsinline height="50%" width="60%">
+              <source src="./static/videos/browse_camera_360_cropped.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <h3 class="title is-4">Shake the bottle</h3>
+      <div class="columns is-centered is-gapless">
+        <div class="column">
+          <div class="publication-video px-1">
+            <video autoplay controls muted loop playsinline height="50%" width="60%">
+              <source src="./static/videos/shake_bottle_cropped.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="publication-video px-1">
+            <video autoplay controls muted loop playsinline height="50%" width="60%">
+              <source src="./static/videos/shake_bottle_360_cropped.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+  <!--/ Side by side video section -->
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@InProceedings{Muchen_LatentHOI,
+        author    = {Li, Muchen and Christen, Sammy and Wan, Chengde and Cai, Yujun and Liao, Renjie and Sigal, Leonid and Ma, Shugao},
+        title     = {LatentHOI: On the Generalizable Hand Object Motion Generation with Latent Hand Diffusion.},
+        booktitle = {Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)},
+        month     = {June},
+        year      = {2025},
+        pages     = {17416-17425}
+      }
+      </code></pre>
+    </div>
+  </section>
+
+
+<!--<footer class="footer">-->
+<!--  <div class="container">-->
+<!--    <div class="content has-text-centered">-->
+<!--      <a class="icon-link"-->
+<!--         href="https://arxiv.org/pdf/2104.03953.pdf">-->
+<!--        <i class="fas fa-file-pdf"></i>-->
+<!--      </a>-->
+<!--      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>-->
+<!--        <i class="fab fa-github"></i>-->
+<!--      </a>-->
+<!--    </div>-->
+<!--    <div class="columns is-centered">-->
+<!--      <div class="column is-8">-->
+<!--        <div class="content">-->
+<!--          <p>-->
+<!--            This website is licensed under a <a rel="license"-->
+<!--                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative-->
+<!--            Commons Attribution-ShareAlike 4.0 International License</a>.-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            This webpage is built with the template from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>. We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</footer>-->
+
+</body>
+</html>
